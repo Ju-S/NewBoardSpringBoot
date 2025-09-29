@@ -21,4 +21,17 @@ public class MemberService {
         registerInfo.setPw(SecurityUtil.encrypt(registerInfo.getPw()));
         memberDAO.register(registerInfo);
     }
+
+    public void updateMember(MemberDTO updateInfo) {
+        memberDAO.updateMember(updateInfo);
+    }
+
+    public void deleteById(String id){
+        memberDAO.deleteById(id);
+    }
+
+    // ID 중복체크
+    public boolean checkDuplicateId(String id){
+        return memberDAO.checkDuplicateId(id);
+    }
 }

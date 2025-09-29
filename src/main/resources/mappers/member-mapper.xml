@@ -3,7 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
-    <select id="select">
-        select * from music
+    <select id="login" resultType="com.kedu.newboard.dto.MemberDTO">
+        select * from member
     </select>
+    <insert id="register">
+        insert into member (
+        id, pw, name, phone, email, postcode, address1, address2
+        ) values(
+        #{id}, #{pw}, #{name}, #{phone}, #{email}, #{postcode}, #{address1}, #{address2}
+        )
+    </insert>
+    <update id="updateById">
+        update member set
+        name = #{name},
+        phone = #{phone},
+        email = #{email},
+        postcode = #{postcode},
+        address1 = #{address1},
+        address2 = #{address2}
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from member where id = #{id}
+    </delete>
+
 </mapper>
