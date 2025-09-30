@@ -34,8 +34,12 @@ public class MemberController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable String id) {
-        memberService.deleteById(id);
+    public ResponseEntity<Void> deleteById(@PathVariable String id, HttpSession session) {
+        String loginId = (String)session.getAttribute("loginId");
+        if(id.equals(loginId)){
+            memberService.deleteById(id);
+            session.invalidate();
+        }
         return ResponseEntity.ok().build();
     }
 }

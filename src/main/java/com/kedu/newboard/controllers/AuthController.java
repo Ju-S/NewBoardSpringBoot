@@ -24,7 +24,7 @@ public class AuthController {
         return ResponseEntity.ok(isExist);
     }
 
-    @GetMapping
+    @GetMapping("/logout")
     public ResponseEntity<Void> logout(HttpSession session) {
         session.invalidate();
         return ResponseEntity.ok().build();

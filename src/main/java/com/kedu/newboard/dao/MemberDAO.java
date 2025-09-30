@@ -27,8 +27,8 @@ public class MemberDAO {
         mybatis.delete("Member.deleteById", id);
     }
 
-    // ID 중복확인
-    public boolean checkDuplicateId(String id){
-        return mybatis.selectOne("Member.checkDuplicateId", id) == null;
+    // getById
+    public MemberDTO getById(String id){
+        return mybatis.selectOne("Member.getById", id);
     }
 }

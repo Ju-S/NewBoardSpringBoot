@@ -6,9 +6,10 @@
     <select id="login" resultType="com.kedu.newboard.dto.MemberDTO">
         select * from member where id = #{id} and pw = #{pw}
     </select>
-    <select id="checkDuplicateId" resultType="String">
+    <select id="getById" resultType="String">
         select id from member where id = #{id}
     </select>
+
     <insert id="register">
         insert into member (
         id, pw, name, phone, email, postcode, address1, address2
@@ -16,6 +17,7 @@
         #{id}, #{pw}, #{name}, #{phone}, #{email}, #{postcode}, #{address1}, #{address2}
         )
     </insert>
+
     <update id="updateById">
         update member set
         name = #{name},
@@ -26,6 +28,7 @@
         address2 = #{address2}
         where id = #{id}
     </update>
+
     <delete id="deleteById">
         delete from member where id = #{id}
     </delete>

@@ -32,6 +32,11 @@ public class MemberService {
 
     // ID 중복체크
     public boolean checkDuplicateId(String id){
-        return memberDAO.checkDuplicateId(id);
+        return memberDAO.getById(id) == null;
+    }
+
+    // getById - Me 호출시
+    public MemberDTO getById(String id){
+        return memberDAO.getById(id);
     }
 }
