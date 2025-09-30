@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
     <select id="login" resultType="com.kedu.newboard.dto.MemberDTO">
-        select * from member
+        select * from member where id = #{id} and pw = #{pw}
     </select>
     <select id="checkDuplicateId" resultType="String">
         select id from member where id = #{id}

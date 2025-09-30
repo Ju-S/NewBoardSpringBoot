@@ -29,6 +29,6 @@ public class MemberDAO {
 
     // ID 중복확인
     public boolean checkDuplicateId(String id){
-        return mybatis.selectOne("Member.checkDuplicateId", id) != null;
+        return mybatis.selectOne("Member.checkDuplicateId", id) == null;
     }
 }
