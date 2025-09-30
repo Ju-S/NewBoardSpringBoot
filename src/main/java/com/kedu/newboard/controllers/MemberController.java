@@ -5,6 +5,7 @@ import com.kedu.newboard.services.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,15 @@ public class MemberController {
     public ResponseEntity<Void> register(@RequestBody MemberDTO registerInfo) {
         memberService.register(registerInfo);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<MemberDTO> me(HttpSession session) {
+        String loginId = session.getAttribute("loginId").toString();
+        if(!loginId.isEmpty()) {
+            return ResponseEntity.ok(memberService.getById(loginId));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @GetMapping("/checkDuplicateId")
