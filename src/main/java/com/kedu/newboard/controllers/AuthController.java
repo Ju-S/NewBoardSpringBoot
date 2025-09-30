@@ -19,6 +19,7 @@ public class AuthController {
         boolean isExist = memberService.login(loginInfo);
         if (isExist) {
             session.setAttribute("loginId", loginInfo.getId());
+            System.out.println(loginInfo.getId());
         }
         return ResponseEntity.ok(isExist);
     }
@@ -31,7 +32,7 @@ public class AuthController {
 
     @GetMapping("/test")
     public ResponseEntity<Void> test(HttpSession session) {
-        session.getAttribute("loginId");
+        System.out.println(session.getAttribute("loginId"));
         return ResponseEntity.ok().build();
     }
 }
