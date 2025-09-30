@@ -17,7 +17,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody MemberDTO loginInfo, HttpSession session) {
         boolean isExist = memberService.login(loginInfo);
-        if(isExist) {
+        if (isExist) {
             session.setAttribute("loginId", loginInfo.getId());
         }
         return ResponseEntity.ok(isExist);
@@ -26,6 +26,12 @@ public class AuthController {
     @GetMapping
     public ResponseEntity<Void> logout(HttpSession session) {
         session.invalidate();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<Void> test(HttpSession session) {
+        session.getAttribute("loginId");
         return ResponseEntity.ok().build();
     }
 }
