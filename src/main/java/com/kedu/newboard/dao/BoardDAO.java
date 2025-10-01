@@ -25,6 +25,11 @@ public class BoardDAO {
         return mybatis.selectOne("Board.getById", targetId);
     }
 
+    // 게시물 총 갯수 return
+    public long getBoardCount(Map<String, Object> searchParams) {
+        return mybatis.selectOne("Board.getBoardCount", searchParams);
+    }
+
     // 게시글 등록
     public void posting(BoardDTO dto) {
         mybatis.insert("Board.posting", dto);

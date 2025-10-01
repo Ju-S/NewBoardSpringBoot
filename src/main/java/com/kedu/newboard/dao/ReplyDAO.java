@@ -18,6 +18,11 @@ public class ReplyDAO {
         return mybatis.selectList("Reply.getList", boardId);
     }
 
+    // 댓글 ID로 조회
+    public ReplyDTO getById(long id) {
+        return mybatis.selectOne("Reply.getById", id);
+    }
+
     // 댓글 입력
     public void insert(ReplyDTO dto) {
         mybatis.insert("Reply.insert", dto);

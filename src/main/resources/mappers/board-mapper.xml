@@ -18,6 +18,11 @@
         SELECT * FROM board WHERE id = #{id}
     </select>
 
+    <!-- 총 게시물의 갯수 조회 -->
+    <select id="getBoardCount" resultType="Long">
+        SELECT count(*) FROM board
+    </select>
+
     <!-- 게시글 등록 -->
     <insert id="posting">
         INSERT INTO board(id, writer, title, contents)

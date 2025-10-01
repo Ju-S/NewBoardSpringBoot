@@ -1,5 +1,6 @@
 package com.kedu.newboard.services;
 
+import com.kedu.newboard.config.BoardConfig;
 import com.kedu.newboard.dao.BoardDAO;
 import com.kedu.newboard.dto.BoardDTO;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,16 @@ public class BoardService {
     public BoardDTO getById(long targetId) {
         boardDAO.increaseViewCount(targetId);
         return boardDAO.getById(targetId);
+    }
+
+    // 게시글의 최대 페이지 수 확인
+    public long getMaxPage(String searchQuery, String category) {
+        Map<String, Object> searchParams = new HashMap<>();
+
+        searchParams.put("searchQuery", searchQuery);
+        searchParams.put("category", category);
+
+        return boardDAO.getBoardCount(searchParams) / ITEM_PER_PAGE;
     }
 
     // 게시글 등록

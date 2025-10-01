@@ -6,6 +6,9 @@
     <select id="getList" resultType="com.kedu.newboard.dto.ReplyDTO">
         SELECT * FROM reply WHERE board_id = #{boardId} ORDER BY create_at
     </select>
+    <select id="getById" resultType="com.kedu.newboard.dto.ReplyDTO">
+        SELECT * FROM reply WHERE id = #{id}
+    </select>
 
     <insert id="insert">
         INSERT INTO reply(id, writer, board_id, contents)
