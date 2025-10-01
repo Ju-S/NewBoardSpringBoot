@@ -25,7 +25,6 @@ public class MemberController {
     @GetMapping("/me")
     public ResponseEntity<MemberDTO> me(HttpSession session) {
         String loginId = (String)session.getAttribute("loginId");
-        System.out.println(loginId);
         if(loginId != null) {
             return ResponseEntity.ok(memberService.getById(loginId));
         }
