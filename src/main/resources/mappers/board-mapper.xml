@@ -6,11 +6,14 @@
     <!-- (to, from) 페이징 게시글 목록 게시 순서대로 select (검색을 위한 필터 설정 - title, writer) -->
     <select id="getList" resultType="com.kedu.newboard.dto.BoardDTO">
         SELECT * FROM (SELECT ROWNUM rm, b.* FROM board b
-        <if test="searchQuery != null and searchQuery != '' and category != null and category != ''">
-            WHERE ${category} like '%'||#{searchQuery}||'%'
+        <if test="searchQuery != null and searchQuery != ''">
+            WHERE
+            title like '%'||#{searchQuery}||'%' OR
+            writer like '%'||#{searchQuery}||'%' OR
+            contents like '%'||#{searchQuery}||'%'
         </if>
-        ) WHERE rm BETWEEN #{from} #{to}
-        ORDER BY create_at
+        ORDER BY create_at)
+        WHERE rm BETWEEN #{from} #{to}
     </select>
 
     <!-- 선택된 게시글의 내용 select -->
@@ -21,6 +24,12 @@
     <!-- 총 게시물의 갯수 조회 -->
     <select id="getBoardCount" resultType="Long">
         SELECT count(*) FROM board
+        <if test="searchQuery != null and searchQuery != ''">
+            WHERE
+            title like '%'||#{searchQuery}||'%' OR
+            writer like '%'||#{searchQuery}||'%' OR
+            contents like '%'||#{searchQuery}||'%'
+        </if>
     </select>
 
     <!-- 게시글 등록 -->

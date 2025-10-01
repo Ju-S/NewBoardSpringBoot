@@ -19,7 +19,7 @@ public class BoardService {
     private final BoardDAO boardDAO;
 
     // 페이지에 해당하는 게시글 목록 조회
-    public List<BoardDTO> getList(long curPage, String searchQuery, String category) {
+    public List<BoardDTO> getList(long curPage, String searchQuery) {
         Map<String, Object> searchParams = new HashMap<>();
 
         long to = ITEM_PER_PAGE * (curPage - 1) + 1;
@@ -29,7 +29,6 @@ public class BoardService {
         searchParams.put("from", from);
 
         searchParams.put("searchQuery", searchQuery);
-        searchParams.put("category", category);
 
         return boardDAO.getList(searchParams);
     }
@@ -41,13 +40,8 @@ public class BoardService {
     }
 
     // 게시글의 최대 페이지 수 확인
-    public long getMaxPage(String searchQuery, String category) {
-        Map<String, Object> searchParams = new HashMap<>();
-
-        searchParams.put("searchQuery", searchQuery);
-        searchParams.put("category", category);
-
-        return boardDAO.getBoardCount(searchParams) / ITEM_PER_PAGE;
+    public long getMaxPage(String searchQuery) {
+        return boardDAO.getBoardCount(searchQuery) / ITEM_PER_PAGE;
     }
 
     // 게시글 등록

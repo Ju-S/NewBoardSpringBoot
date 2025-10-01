@@ -26,12 +26,11 @@ public class BoardController {
     // 게시글 목록 조회
     @GetMapping
     public ResponseEntity<Map<String, Object>> getList(@RequestParam long curpage,
-                                                  @RequestParam(defaultValue = "", required = false) String searchQuery,
-                                                  @RequestParam(defaultValue = "", required = false) String category) {
+                                                  @RequestParam(defaultValue = "", required = false) String searchQuery) {
         Map<String, Object> response = new HashMap<>();
 
-        List<BoardDTO> boardList = boardService.getList(curpage, searchQuery, category);
-        long maxPage = boardService.getMaxPage(searchQuery, category);
+        List<BoardDTO> boardList = boardService.getList(curpage, searchQuery);
+        long maxPage = boardService.getMaxPage(searchQuery);
 
         response.put("boardList", boardList);
         response.put("itemPerPage", BoardConfig.ITEM_PER_PAGE);
