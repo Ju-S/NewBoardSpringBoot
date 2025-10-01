@@ -30,12 +30,12 @@ public class BoardController {
         Map<String, Object> response = new HashMap<>();
 
         List<BoardDTO> boardList = boardService.getList(curpage, searchQuery);
-        long maxPage = boardService.getMaxPage(searchQuery);
+        long totalPage = boardService.getTotalPage(searchQuery);
 
         response.put("boardList", boardList);
         response.put("itemPerPage", BoardConfig.ITEM_PER_PAGE);
         response.put("pagePerNav", BoardConfig.PAGE_PER_NAV);
-        response.put("maxPage", maxPage);
+        response.put("totalPage", totalPage);
 
         return ResponseEntity.ok(response);
     }
