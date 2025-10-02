@@ -25,11 +25,11 @@ public class BoardController {
 
     // 게시글 목록 조회
     @GetMapping
-    public ResponseEntity<Map<String, Object>> getList(@RequestParam long curpage,
+    public ResponseEntity<Map<String, Object>> getList(@RequestParam long currentpage,
                                                   @RequestParam(defaultValue = "", required = false) String searchQuery) {
         Map<String, Object> response = new HashMap<>();
 
-        List<BoardDTO> boardList = boardService.getList(curpage, searchQuery);
+        List<BoardDTO> boardList = boardService.getList(currentpage, searchQuery);
         long totalPage = boardService.getTotalPage(searchQuery);
 
         response.put("boardList", boardList);
