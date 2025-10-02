@@ -25,12 +25,11 @@
     <!-- 회원정보 수정 -->
     <update id="updateById">
         UPDATE member SET
-        name = #{name},
         phone = #{phone},
-        email = #{email},
-        postcode = #{postcode},
-        address1 = #{address1},
-        address2 = #{address2}
+        email = #{email, jdbcType=VARCHAR},
+        postcode = #{postcode, jdbcType=VARCHAR},
+        address1 = #{address1, jdbcType=VARCHAR},
+        address2 = #{address2, jdbcType=VARCHAR}
         WHERE id = #{id}
     </update>
 
