@@ -18,7 +18,7 @@ public class MemberDTO {
 
     private String email;
 
-    private long postcode;
+    private String postcode;
     private String address1;
     private String address2;
 

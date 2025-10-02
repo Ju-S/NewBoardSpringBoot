@@ -37,17 +37,17 @@ public class MemberController {
         return ResponseEntity.ok(result);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> updateMember(@PathVariable String id, @RequestBody MemberDTO updateInfo) {
-        memberService.updateMember(updateInfo);
+    @PutMapping
+    public ResponseEntity<Void> updateMember( @RequestBody MemberDTO dto) {
+        memberService.updateMember(dto);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable String id, HttpSession session) {
+    @DeleteMapping
+    public ResponseEntity<Void> deleteById(HttpSession session) {
         String loginId = (String)session.getAttribute("loginId");
-        if(id.equals(loginId)){
-            memberService.deleteById(id);
+        if(loginId != null){
+            memberService.deleteById(loginId);
             session.invalidate();
         }
         return ResponseEntity.ok().build();
