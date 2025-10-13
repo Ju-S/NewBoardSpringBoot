@@ -12,9 +12,9 @@ public class MemberService {
 
     private final MemberDAO memberDAO;
 
-    public boolean login(MemberDTO loginInfo) {
+    public MemberDTO login(MemberDTO loginInfo) {
         loginInfo.setPw(SecurityUtil.encrypt(loginInfo.getPw()));
-        return memberDAO.login(loginInfo) != null;
+        return memberDAO.login(loginInfo);
     }
 
     public void register(MemberDTO registerInfo) {
