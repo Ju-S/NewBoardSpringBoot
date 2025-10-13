@@ -19,18 +19,23 @@ public class JWTInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 나중엔 url 별로 어떤 url은 인터셉트하고 어떤 url은 인터셉트 안 할건지 지정
         String authHeader = request.getHeader("Authorization");
-        String token = authHeader.substring(7);
 
-        try {
-            DecodedJWT djwt = jwt.verifyToken(token);
-            // 인터셉터에서 미리 ID를 꺼내서 넘겨주는게 편함. - 가장 많이 사용하는 정보
-            request.setAttribute("loginId", djwt.getSubject());
-            return true;
-        }catch (Exception e){ // 인증 실패시
-            e.printStackTrace();
+        if(authHeader != null) {
+            String token = authHeader.substring(7);
+
+            try {
+                DecodedJWT djwt = jwt.verifyToken(token);
+                // 인터셉터에서 미리 ID를 꺼내서 넘겨주는게 편함. - 가장 많이 사용하는 정보
+                request.setAttribute("loginId", djwt.getSubject());
+                return true;
+            }catch (Exception e){ // 인증 실패시
+                e.printStackTrace();
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token Error");
+                return false;
+            }
+        } else {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token Error");
             return false;
         }
-
     }
 }
