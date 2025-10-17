@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final MemberService memberService;
-
-    @Autowired
-    private JWTUtil jwt;
+    private final JWTUtil jwt;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody MemberDTO loginInfo, HttpSession session) {
